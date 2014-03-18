@@ -64,26 +64,7 @@ namespace NCommander
                 var param = Params[i];
 
                 var arg = args[i];
-                object value;
-                switch (param.ParameterType)
-                {
-                case ParameterType.Int:
-                    int ivalue;
-                    if (int.TryParse(arg, out ivalue))
-                    {
-                        value = ivalue;
-                    }
-                    else
-                    {
-                        throw new ArgumentException(string.Format("\"{0}\" is not a valid integer.", arg), param.Name);
-                    }
-                    break;
-                case ParameterType.String:
-                    value = arg;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-                }
+                object value = param.ParameterType.Convert(arg);
 
                 convertedArgs.Add(param.Name, value);
             }
