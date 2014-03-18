@@ -25,6 +25,8 @@ namespace NCommander
         public readonly Dictionary<string, Command> Commands = new Dictionary<string, Command>();
         public readonly Dictionary<string, Action> HelpTopics = new Dictionary<string, Action>();
 
+        public Action AdditionalUsage;
+
         public void ProcessArgs(params string[] args)
         {
             ProcessArgs((IEnumerable<string>)args);
@@ -61,12 +63,10 @@ namespace NCommander
             Console.WriteLine("    {0} command [args...]", this.ProgramName);
             Console.WriteLine();
 
-            // TODO: Print NDesk.Options options here
-
-            // Console.WriteLine("Options:");
-            // Console.WriteLine();
-            // _options.WriteOptionDescriptions(Console.Out);
-            // Console.WriteLine();
+            if (AdditionalUsage != null)
+            {
+                AdditionalUsage();
+            }
         }
 
         public void ShowGeneralHelp()
