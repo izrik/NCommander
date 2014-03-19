@@ -86,7 +86,7 @@ namespace NCommander
 
             if (HelpTopics.Count > 0)
             {
-                Console.WriteLine("Additional help topics:");
+                Console.WriteLine("Help topics:");
                 Console.WriteLine();
                 foreach (var topic in HelpTopics.Keys)
                 {
@@ -94,6 +94,23 @@ namespace NCommander
                 }
                 Console.WriteLine();
             }
+
+            var types = GetAllParameterTypes();
+            if (types.Length > 0)
+            {
+                Console.WriteLine("Types:");
+                Console.WriteLine();
+                foreach (var type in types)
+                {
+                    Console.WriteLine("    {0,-10} {1}", type.Name, type.Description);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public ParameterType[] GetAllParameterTypes()
+        {
+            return Commands.Values.SelectMany(x => x.Params).Select(x => x.ParameterType).Distinct().ToArray();
         }
     }
 }

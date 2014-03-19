@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NCommander
 {
@@ -26,13 +27,19 @@ namespace NCommander
             {
                 var topic = ((string)(args["topic"])).ToLower();
 
+                var types = _commander.GetAllParameterTypes();
+
                 if (_commander.Commands.ContainsKey(topic))
                 {
-                    GetHelp(_commander.Commands[topic]);
+                    GetHelpForCommand(_commander.Commands[topic]);
                 }
                 else if (_commander.HelpTopics.ContainsKey(topic))
                 {
                     _commander.HelpTopics[topic]();
+                }
+                else if (types.FirstOrDefault(x => x.Name == topic) != null)
+                {
+                    GetHelpForType(types.First(x => x.Name == topic));
                 }
                 else
                 {
@@ -46,7 +53,7 @@ namespace NCommander
             }
         }
 
-        protected void GetHelp(Command command)
+        protected void GetHelpForCommand(Command command)
         {
             if (command.HelpAction != null)
             {
@@ -98,6 +105,25 @@ namespace NCommander
                     Console.WriteLine(command.HelpText);
                     Console.WriteLine();
                 }
+            }
+        }
+
+        void GetHelpForType(ParameterType parameterType)
+        {
+            Console.Write(parameterType.Name);
+
+            if (!string.IsNullOrWhiteSpace(parameterType.Description))
+            {
+                Console.Write(" - {0}", parameterType.Description);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            if (!string.IsNullOrWhiteSpace(parameterType.HelpText))
+            {
+                Console.WriteLine(parameterType.HelpText);
+                Console.WriteLine();
             }
         }
     }
