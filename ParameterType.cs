@@ -5,7 +5,7 @@ namespace NCommander
     public class ParameterType
     {
         public static readonly ParameterType Integer = new ParameterType(
-                                                   name: "Integer",
+                                                   name: "integer",
                                                    description: "A whole number, positive or negative",
                                                    helpText: string.Format("Any integer from {0} to {1}", int.MinValue, int.MaxValue),
                                                    outputType: typeof(int),
@@ -13,7 +13,7 @@ namespace NCommander
                                                );
 
         public static readonly ParameterType String = new ParameterType(
-                                                  name: "String",
+                                                  name: "string",
                                                   description: "A string; no conversion is performed",
                                                   // helpText: "A string; no conversion is performed",
                                                   outputType: typeof(string),
