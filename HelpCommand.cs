@@ -25,33 +25,27 @@ namespace NCommander
         {
             if (args.ContainsKey("topic"))
             {
-                var rawTopic = (string)(args["topic"]);
-                var topics = new [] { rawTopic, rawTopic.ToLower() };
+                var topic = ((string)(args["topic"])).ToLower();
+
                 var types = _commander.GetAllParameterTypes();
 
-                foreach (var topic in topics)
+                if (_commander.Commands.ContainsKey(topic))
                 {
-                    if (_commander.Commands.ContainsKey(topic))
-                    {
-                        GetHelpForCommand(_commander.Commands[topic]);
-                        return;
-                    }
-
-                    if (_commander.HelpTopics.ContainsKey(topic))
-                    {
-                        _commander.HelpTopics[topic]();
-                        return;
-                    }
-
-                    if (types.FirstOrDefault(x => x.Name == topic) != null)
-                    {
-                        GetHelpForType(types.First(x => x.Name == topic));
-                        return;
-                    }
-		}
-
-                Console.WriteLine("Unknown topic: \"{0}\"", rawTopic);
-                _commander.ShowUsage();
+                    GetHelpForCommand(_commander.Commands[topic]);
+                }
+                else if (_commander.HelpTopics.ContainsKey(topic))
+                {
+                    _commander.HelpTopics[topic]();
+                }
+                else if (types.FirstOrDefault(x => x.Name == topic) != null)
+                {
+                    GetHelpForType(types.First(x => x.Name == topic));
+                }
+                else
+                {
+                    Console.WriteLine("Unknown topic: \"{0}\"", topic);
+                    _commander.ShowUsage();
+                }
             }
             else
             {
