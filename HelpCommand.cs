@@ -94,7 +94,7 @@ namespace NCommander
                             "    {0,-10} {1}{2} - {3}", 
                             param.Name,
                             (param.IsOptional ? "Optional " : ""),
-                            param.ParameterType,
+                            param.ParameterType.Name,
                             param.Description);
                     }
                     Console.WriteLine();
