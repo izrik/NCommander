@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A9E25E5D-EB90-4B4A-8793-4E9D97037E42}</ProjectGuid>
+    <ProjectGuid>{89141BAC-4A12-4CDC-A9C0-701B07606925}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NCommander</RootNamespace>
-    <AssemblyName>NCommander</AssemblyName>
+    <RootNamespace>NCommanderTests</RootNamespace>
+    <AssemblyName>NCommanderTests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,14 +30,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commander.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="Parameter.cs" />
-    <Compile Include="ParameterType.cs" />
-    <Compile Include="HelpCommand.cs" />
+    <Compile Include="CommandTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NCommander.csproj">
+      <Project>{A9E25E5D-EB90-4B4A-8793-4E9D97037E42}</Project>
+      <Name>NCommander</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
