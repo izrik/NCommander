@@ -38,6 +38,7 @@
     <Compile Include="Parameter.cs" />
     <Compile Include="ParameterType.cs" />
     <Compile Include="HelpCommand.cs" />
+    <Compile Include="Option.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

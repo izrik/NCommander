@@ -9,6 +9,7 @@ namespace NCommander
         public string Name = string.Empty;
         public string Description = string.Empty;
         public Parameter[] Params = new Parameter[0];
+        public Option[] Options = new Option[0];
 
         public string HelpText = string.Empty;
         public Action HelpAction;
@@ -48,25 +49,56 @@ namespace NCommander
 
         protected Dictionary<string, object> ConvertArguments(List<string> args)
         {
-            if (args.Count < Params.Length &&
-                !Params[args.Count].IsOptional)
+            var convertedArgs = new Dictionary<string, object>();
+
+            foreach (var option in Options)
             {
-                var param = Params[args.Count];
-                throw new ArgumentException(string.Format("No value was provided for required parameter \"{0}\".", param.Name), param.Name);
+                convertedArgs[option.Name] = false;
             }
 
             int i;
-            var convertedArgs = new Dictionary<string, object>();
+            int p = 0;
             for (i = 0; i < args.Count; i++)
             {
-                if (i >= Params.Length) break;
-
-                var param = Params[i];
-
                 var arg = args[i];
-                object value = param.ParameterType.Convert(arg);
 
-                convertedArgs.Add(param.Name, value);
+                if (arg.StartsWith("--"))
+                {
+                    bool found = false;
+                    foreach (var option in Options)
+                    {
+                        var longName = "--" + option.Name;
+                        if (arg == longName)
+                        {
+                            found = true;
+                            convertedArgs[option.Name] = true;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        throw new KeyNotFoundException(string.Format("Unrecognized option: {0}", arg));
+                    }
+                }
+                else
+                {
+                    if (p >= Params.Length) continue;
+
+                    var param = Params[p];
+                    p++;
+
+                    object value = param.ParameterType.Convert(arg);
+
+                    convertedArgs.Add(param.Name, value);
+                }
+            }
+
+            if (p < Params.Length &&
+                !Params[p].IsOptional)
+            {
+                var param = Params[p];
+                throw new ArgumentException(string.Format("No value was provided for required parameter \"{0}\".", param.Name), param.Name);
             }
 
             return convertedArgs;
