@@ -63,6 +63,15 @@ namespace NCommander
             {
                 Console.WriteLine("Usage:");
                 Console.Write("    {0} {1}", _commander.ProgramName, command.Name);
+                foreach (var option in command.Options)
+                {
+                    Console.Write(" [--{0}", option.Name);
+                    if (option.Type != ParameterType.Flag)
+                    {
+                        Console.Write(" {0}", option.Type.Name.ToUpper());
+                    }
+                    Console.Write("]");
+                }
                 foreach (var param in command.Params)
                 {
                     if (param.IsOptional)
@@ -83,6 +92,21 @@ namespace NCommander
                     Console.WriteLine();
                 }
 
+                if (command.Options.Length > 0)
+                {
+                    Console.WriteLine("Options:");
+                    Console.WriteLine();
+
+                    foreach (var option in command.Options)
+                    {
+                        Console.WriteLine(
+                            "    {0,-10} {1,-8} - {2}",
+                            option.Name,
+                            (option.Type == ParameterType.Flag ? "" : option.Type.Name),
+                            option.Description);
+                    }
+                    Console.WriteLine();
+                }
                 if (command.Params.Length > 0)
                 {
                     Console.WriteLine("Parameters:");
