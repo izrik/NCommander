@@ -165,6 +165,51 @@ namespace NCommanderTests
             Assert.AreEqual("mixedquotedand \" unquoted", args[1]);
             Assert.AreEqual("arg3", args[2]);
         }
+
+        [Test]
+        public void TestQuotedEmptyString()
+        {
+            // given
+            string[] args;
+
+            // when
+            args = Splitter.SplitArgs(" arg1 '' arg3");
+
+            // then
+            Assert.IsNotNull(args);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual("arg1", args[0]);
+            Assert.AreEqual("", args[1]);
+            Assert.AreEqual("arg3", args[2]);
+
+            // when
+            args = Splitter.SplitArgs("arg1  ''  ");
+
+            // then
+            Assert.IsNotNull(args);
+            Assert.AreEqual(2, args.Length);
+            Assert.AreEqual("arg1", args[0]);
+            Assert.AreEqual("", args[1]);
+
+            // when
+            args = Splitter.SplitArgs("  '' arg2");
+
+            // then
+            Assert.IsNotNull(args);
+            Assert.AreEqual(2, args.Length);
+            Assert.AreEqual("", args[0]);
+            Assert.AreEqual("arg2", args[1]);
+
+            // when
+            args = Splitter.SplitArgs(" arg1 '''' arg3");
+
+            // then
+            Assert.IsNotNull(args);
+            Assert.AreEqual(3, args.Length);
+            Assert.AreEqual("arg1", args[0]);
+            Assert.AreEqual("", args[1]);
+            Assert.AreEqual("arg3", args[2]);
+        }
     }
 }
 

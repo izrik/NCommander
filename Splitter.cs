@@ -14,6 +14,7 @@ namespace NCommander
             bool isDoubleQuoted = false;
             int index = -1;
             int lastQuoteIndex = -1;
+            bool makeArg = false;
 
             foreach (char ch_ in input)
             {
@@ -22,12 +23,13 @@ namespace NCommander
 
                 if (char.IsWhiteSpace(ch) && !isQuoted && !isDoubleQuoted)
                 {
-                    if (currentArg.Count > 0)
+                    if (currentArg.Count > 0 || makeArg)
                     {
                         args.Add(new string(currentArg.ToArray()));
                         currentArg.Clear();
                     }
 
+                    makeArg = false;
                     continue;
                 }
 
@@ -68,6 +70,7 @@ namespace NCommander
                     {
                         isQuoted = true;
                         lastQuoteIndex = index;
+                        makeArg = true;
                     }
                 }
                 else if (ch == '"')
@@ -84,6 +87,7 @@ namespace NCommander
                     {
                         isDoubleQuoted = true;
                         lastQuoteIndex = index;
+                        makeArg = true;
                     }
                 }
                 else
@@ -97,7 +101,7 @@ namespace NCommander
                 throw new UnmatchedQuoteException(lastQuoteIndex, input[lastQuoteIndex]);
             }
 
-            if (currentArg.Count > 0)
+            if (currentArg.Count > 0 || makeArg)
             {
                 args.Add(new string(currentArg.ToArray()));
             }
