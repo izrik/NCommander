@@ -39,6 +39,7 @@
     <Compile Include="ParameterType.cs" />
     <Compile Include="HelpCommand.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="Splitter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
