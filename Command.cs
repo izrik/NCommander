@@ -32,6 +32,11 @@ namespace NCommander
             bool optionalStarted = false;
             foreach (var param in Params)
             {
+                if (param.ParameterType == ParameterType.Flag)
+                {
+                    throw new ArgumentException(string.Format("\"flag\" is not a valid type for a parameter ({0})", param.Name));
+                }
+
                 if (param.IsOptional)
                 {
                     optionalStarted = true;
@@ -53,7 +58,14 @@ namespace NCommander
 
             foreach (var option in Options)
             {
-                convertedArgs[option.Name] = false;
+                if (option.Type == ParameterType.Flag)
+                {
+                    convertedArgs[option.Name] = false;
+                }
+                else
+                {
+                    convertedArgs[option.Name] = null;
+                }
             }
 
             int i;
@@ -71,7 +83,20 @@ namespace NCommander
                         if (arg == longName)
                         {
                             found = true;
-                            convertedArgs[option.Name] = true;
+                            if (option.Type == ParameterType.Flag)
+                            {
+                                convertedArgs[option.Name] = true;
+                            }
+                            else
+                            {
+                                if (i + 1 >= args.Count)
+                                {
+                                    throw new ArgumentException("Ran out of arguments (option \"{0}\")", option.Name);
+                                }
+
+                                object value = option.Type.ConvertAction(args[i + 1]);
+                                convertedArgs[option.Name] = value;
+                            }
                             break;
                         }
                     }

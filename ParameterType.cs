@@ -20,6 +20,14 @@ namespace NCommander
                                                   convertAction: (x) => x
                                               );
 
+        public static readonly ParameterType Flag = new ParameterType(
+                                                            name: "flag",
+                                                            description: "A boolean option that takes no value from arguments",
+                                                            outputType: typeof(object),
+                                                            convertAction: (x) => null
+                                                        );
+
+
         public ParameterType(string name, Func<string, object> convertAction, string description="", string helpText="", Type outputType=null)
         {
             if (name == null) throw new ArgumentNullException("name");
