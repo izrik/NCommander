@@ -45,7 +45,14 @@ namespace NCommander
                 {
                     throw new ArgumentException(string.Format("Required parameter \"{0}\" follows an optional parameter.", param.Name), param.Name);
                 }
+
+                if (param.ParameterType == ParameterType.StringArray &&
+                    Array.IndexOf(Params, param) != Params.Length - 1)
+                {
+                    throw new ArgumentException(string.Format("The parameter \"{0}\" has a type of string array but is not the last parameter in the list.", param.Name), param.Name);
+                }
             }
+
 
             var convertedArgs = ConvertArguments(args.ToList());
 
@@ -70,6 +77,7 @@ namespace NCommander
 
             int i;
             int p = 0;
+            var stringArray = new List<string>();
             for (i = 0; i < args.Count; i++)
             {
                 var arg = args[i];
@@ -112,12 +120,27 @@ namespace NCommander
                     if (p >= Params.Length) continue;
 
                     var param = Params[p];
-                    p++;
 
-                    object value = param.ParameterType.Convert(arg);
-
-                    convertedArgs.Add(param.Name, value);
+                    object value;
+                    if (param.ParameterType == ParameterType.StringArray)
+                    {
+                        stringArray.Add(arg);
+                    }
+                    else
+                    {
+                        p++;
+                        value = param.ParameterType.Convert(arg);
+                        convertedArgs.Add(param.Name, value);
+                    }
                 }
+            }
+
+            if (p < Params.Length &&
+                Params[p].ParameterType == ParameterType.StringArray)
+            {
+                var param = Params[p];
+                convertedArgs[param.Name] = stringArray.ToArray();
+                p++;
             }
 
             if (p < Params.Length &&
