@@ -93,8 +93,9 @@ namespace NCommander
                                 {
                                     throw new ArgumentException("Ran out of arguments (option \"{0}\")", option.Name);
                                 }
+                                i++;
 
-                                object value = option.Type.ConvertAction(args[i + 1]);
+                                object value = option.Type.ConvertAction(args[i]);
                                 convertedArgs[option.Name] = value;
                             }
                             break;

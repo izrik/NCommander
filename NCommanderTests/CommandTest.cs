@@ -169,6 +169,32 @@ namespace NCommanderTests
             Assert.IsTrue(convertedArgs.ContainsKey("param"));
             Assert.AreEqual("arg2", convertedArgs["param"]);
         }
+
+        [Test]
+        public void OptionsWithValuesConsumeTwoArgumentsAndDontAffectParameters()
+        {
+            // given
+            var command = new Command();
+            command.Params = new Parameter[] {
+                new Parameter { Name = "param", ParameterType = ParameterType.String }
+            };
+            command.Options = new Option[] {
+                new Option { Name = "option", Type=ParameterType.String }
+            };
+            Dictionary<string, object> convertedArgs = null;
+            command.ExecuteDelegate = (x) => convertedArgs = x;
+
+            // when
+            command.Execute(new string[] { "--option", "arg2", "arg3" });
+
+            // then
+            Assert.IsNotNull(convertedArgs);
+            Assert.AreEqual(2, convertedArgs.Count);
+            Assert.IsTrue(convertedArgs.ContainsKey("option"));
+            Assert.AreEqual("arg2", convertedArgs["option"]);
+            Assert.IsTrue(convertedArgs.ContainsKey("param"));
+            Assert.AreEqual("arg3", convertedArgs["param"]);
+        }
     }
 }
 
