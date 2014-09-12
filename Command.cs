@@ -34,7 +34,7 @@ namespace NCommander
             {
                 if (param.ParameterType == ParameterType.Flag)
                 {
-                    throw new ArgumentException(string.Format("\"flag\" is not a valid type for a parameter ({0})", param.Name));
+                    throw new InvalidParameterTypeException(param);
                 }
 
                 if (param.IsOptional)
@@ -43,13 +43,13 @@ namespace NCommander
                 }
                 else if (optionalStarted)
                 {
-                    throw new ArgumentException(string.Format("Required parameter \"{0}\" follows an optional parameter.", param.Name), param.Name);
+                    throw new OptionalParameterOutOfPlaceException(param);
                 }
 
                 if (param.ParameterType == ParameterType.StringArray &&
                     Array.IndexOf(Params, param) != Params.Length - 1)
                 {
-                    throw new ArgumentException(string.Format("The parameter \"{0}\" has a type of string array but is not the last parameter in the list.", param.Name), param.Name);
+                    throw new StringArrayParameterOutOfPlaceException(param);
                 }
             }
 
@@ -99,7 +99,7 @@ namespace NCommander
                             {
                                 if (i + 1 >= args.Count)
                                 {
-                                    throw new ArgumentException("Ran out of arguments (option \"{0}\")", option.Name);
+                                    throw new NotEnoughArgumentsForOptionException(option);
                                 }
                                 i++;
 
@@ -112,7 +112,7 @@ namespace NCommander
 
                     if (!found)
                     {
-                        throw new KeyNotFoundException(string.Format("Unrecognized option: {0}", arg));
+                        throw new UnrecognizedOptionException(arg);
                     }
                 }
                 else
@@ -146,8 +146,7 @@ namespace NCommander
             if (p < Params.Length &&
                 !Params[p].IsOptional)
             {
-                var param = Params[p];
-                throw new ArgumentException(string.Format("No value was provided for required parameter \"{0}\".", param.Name), param.Name);
+                throw new NotEnoughArgumentsForParameterException(Params[p]);
             }
 
             return convertedArgs;

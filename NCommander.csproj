@@ -40,6 +40,12 @@
     <Compile Include="HelpCommand.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Splitter.cs" />
+    <Compile Include="UnrecognizedOptionException.cs" />
+    <Compile Include="NotEnoughArgumentsForOptionException.cs" />
+    <Compile Include="NotEnoughArgumentsForParameterException.cs" />
+    <Compile Include="InvalidParameterTypeException.cs" />
+    <Compile Include="OptionalParameterOutOfPlaceException.cs" />
+    <Compile Include="StringArrayParameterOutOfPlaceException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

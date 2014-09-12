@@ -94,7 +94,8 @@ namespace NCommanderTests
             command.ExecuteDelegate = (x) => convertedArgs = x;
 
             // when
-            var e = Assert.Throws<ArgumentException>(() => command.Execute(new string[0]));
+            var e = Assert.Throws<NotEnoughArgumentsForParameterException>(
+                () => command.Execute(new string[0]));
 
             // then
             Assert.IsNotNull(e);
@@ -242,7 +243,8 @@ namespace NCommanderTests
             command.ExecuteDelegate = (x) => convertedArgs = x;
 
             // when
-            var e = Assert.Throws<ArgumentException>(() => command.Execute(new string[]{"arg1", "arg2", "arg3"}));
+            var e = Assert.Throws<StringArrayParameterOutOfPlaceException>(
+                () => command.Execute(new string[]{"arg1", "arg2", "arg3"}));
 
             // then
             Assert.IsNotNull(e);

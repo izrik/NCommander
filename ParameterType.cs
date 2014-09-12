@@ -74,7 +74,7 @@ namespace NCommander
             {
                 throw new InvalidOperationException(
                     string.Format(
-                        "The converted value of \"{0}\" should be {1}, but is {2}",
+                        "The converted value of \"{0}\" should be of type {1}, but is of type {2}",
                         arg,
                         OutputType,
                         convertedType));
