@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NCommander
 {
-    public class StringArrayParameterOutOfPlaceException : Exception
+    public class StringArrayParameterOutOfPlaceException : NCommanderException
     {
         public StringArrayParameterOutOfPlaceException(Parameter parameter)
         {

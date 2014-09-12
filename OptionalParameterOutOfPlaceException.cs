@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NCommander
 {
-    public class OptionalParameterOutOfPlaceException : Exception
+    public class OptionalParameterOutOfPlaceException : NCommanderException
     {
         public OptionalParameterOutOfPlaceException(Parameter parameter)
         {

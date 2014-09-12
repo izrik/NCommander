@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NCommander
 {
-    class UnrecognizedOptionException : Exception
+    class UnrecognizedOptionException : NCommanderException
     {
         public UnrecognizedOptionException(string arg)
         {

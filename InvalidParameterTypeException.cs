@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NCommander
 {
-    public class InvalidParameterTypeException : Exception
+    public class InvalidParameterTypeException : NCommanderException
     {
         public InvalidParameterTypeException(Parameter parameter)
         {

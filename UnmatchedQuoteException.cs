@@ -2,11 +2,9 @@
 
 namespace NCommander
 {
-    public class UnmatchedQuoteException : Exception
+    public class UnmatchedQuoteException : NCommanderException
     {
-
         public UnmatchedQuoteException(int index, char delimiter)
-            : base(string.Format("Unmatched quote delimiter \"{0}\" at index {1}", delimiter.ToString(), index))
         {
             Index = index;
             Delimiter = delimiter;
@@ -14,6 +12,14 @@ namespace NCommander
 
         public readonly char Delimiter;
         public readonly int Index;
+
+        public override string Message
+        {
+            get
+            {
+                return string.Format("Unmatched quote delimiter \"{0}\" at index {1}", Delimiter.ToString(), Index);
+            }
+        }
     }
 }
 

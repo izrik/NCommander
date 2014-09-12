@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NCommander
 {
-    public class NotEnoughArgumentsForOptionException : Exception
+    public class NotEnoughArgumentsForOptionException : NCommanderException
     {
         public NotEnoughArgumentsForOptionException(Option option)
         {

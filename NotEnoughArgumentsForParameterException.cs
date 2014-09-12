@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NCommander
 {
-    public class NotEnoughArgumentsForParameterException : Exception
+    public class NotEnoughArgumentsForParameterException : NCommanderException
     {
         public NotEnoughArgumentsForParameterException(Parameter parameter)
         {
