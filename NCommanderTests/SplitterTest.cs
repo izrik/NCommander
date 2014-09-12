@@ -131,7 +131,7 @@ namespace NCommanderTests
             string[] args = null;
 
             // when
-            var e = Assert.Throws<Splitter.UnmatchedQuoteException>(() => args = Splitter.SplitArgs("arg1 'unmatched quote string"));
+            var e = Assert.Throws<UnmatchedQuoteException>(() => args = Splitter.SplitArgs("arg1 'unmatched quote string"));
 
             // then
             Assert.IsNotNull(e);
@@ -140,7 +140,7 @@ namespace NCommanderTests
             Assert.IsNull(args);
 
             // when
-            e = Assert.Throws<Splitter.UnmatchedQuoteException>(() => args = Splitter.SplitArgs("arg1 \"unmatched dquote string"));
+            e = Assert.Throws<UnmatchedQuoteException>(() => args = Splitter.SplitArgs("arg1 \"unmatched dquote string"));
 
             // then
             Assert.IsNotNull(e);

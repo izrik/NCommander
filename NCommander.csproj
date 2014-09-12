@@ -46,6 +46,7 @@
     <Compile Include="InvalidParameterTypeException.cs" />
     <Compile Include="OptionalParameterOutOfPlaceException.cs" />
     <Compile Include="StringArrayParameterOutOfPlaceException.cs" />
+    <Compile Include="UnmatchedQuoteException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
