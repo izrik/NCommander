@@ -19,7 +19,7 @@ namespace NCommander
         {
             get
             {
-                return string.Format("Ran out of arguments (option \"{0}\")", Option.Name);
+                return string.Format("No value was provided for option \"{0}\"", Option.Name);
             }
         }
     }
