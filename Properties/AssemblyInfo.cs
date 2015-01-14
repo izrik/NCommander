@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 [assembly: AssemblyTitle("NCommander")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A C# library for building command-base console applications. Inspired by python's argparse.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("izrik")]
+[assembly: AssemblyProduct("NCommander")]
+[assembly: AssemblyCopyright("Copyright 2015 izrik")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
