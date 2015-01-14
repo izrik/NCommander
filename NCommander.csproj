@@ -50,4 +50,7 @@
     <Compile Include="NCommanderException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include=".travis.yml" />
+  </ItemGroup>
 </Project>
