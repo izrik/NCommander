@@ -1,3 +1,11 @@
-﻿
-language: csharp
-solution: NCommander.sln
+
+language: c
+install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+script:
+  - xbuild /p:Configuration=Release NCommander.sln 
+  - nunit-console ./NCommanderTests/bin/Debug/NCommanderTests.dll
+
+branches:
+  only:
+    - master
