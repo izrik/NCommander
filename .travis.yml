@@ -1,5 +1,9 @@
 
 language: csharp
+
+install:
+  - sudo apt-get install nunit-console
+
 script:
   - xbuild /p:Configuration=Debug NCommander.sln 
   - nunit-console ./NCommanderTests/bin/Debug/NCommanderTests.dll
