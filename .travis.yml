@@ -1,11 +1,14 @@
 
-language: c
+language: csharp
+
 install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
+  - sudo apt-get install nunit-console
+
 script:
-  - xbuild /p:Configuration=Release NCommander.sln 
+  - xbuild /p:Configuration=Debug NCommander.sln 
   - nunit-console ./NCommanderTests/bin/Debug/NCommanderTests.dll
 
 branches:
   only:
     - travis
+    - master
