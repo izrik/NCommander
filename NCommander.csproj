@@ -54,5 +54,6 @@
     <None Include=".travis.yml" />
     <None Include="LICENSE" />
     <None Include="README.md" />
+    <None Include="NCommander.nuspec" />
   </ItemGroup>
 </Project>
