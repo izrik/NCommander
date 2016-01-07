@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace NCommander
 {
     public class Commander
     {
-        public Commander(string programName, string programVersion, bool addHelpCommand=true)
+        public Commander(string programName, string programVersion, bool addHelpCommand=true, TextWriter output=null)
         {
             if (string.IsNullOrWhiteSpace(programName)) throw new ArgumentNullException("programName");
             if (string.IsNullOrWhiteSpace(programVersion)) throw new ArgumentNullException("programVersion");
+
+            if (output == null) output = Console.Out;
 
             this.ProgramName = programName;
             this.ProgramVersion = programVersion;
@@ -18,12 +21,15 @@ namespace NCommander
             {
                 Commands.Add("help", new HelpCommand(this));
             }
+
+            Output = output;
         }
 
         public readonly string ProgramName;
         public readonly string ProgramVersion;
         public readonly Dictionary<string, Command> Commands = new Dictionary<string, Command>();
         public readonly Dictionary<string, Action> HelpTopics = new Dictionary<string, Action>();
+        public readonly TextWriter Output;
 
         public Action AdditionalUsage;
 
@@ -44,7 +50,7 @@ namespace NCommander
             }
             else
             {
-                Console.WriteLine("Unknown command, \"{0}\"", commandName);
+                Output.WriteLine("Unknown command, \"{0}\"", commandName);
                 ShowUsage();
             }
         }
@@ -52,16 +58,16 @@ namespace NCommander
 
         public void ShowVersion()
         {
-            Console.WriteLine("{0} version {1}", this.ProgramName, this.ProgramVersion);
+            Output.WriteLine("{0} version {1}", this.ProgramName, this.ProgramVersion);
         }
 
         public void ShowUsage()
         {
-            Console.WriteLine("Usage:");
-            Console.WriteLine("    {0} [options]", this.ProgramName);
-            Console.WriteLine("    {0} help [command_or_topic]", this.ProgramName);
-            Console.WriteLine("    {0} command [args...]", this.ProgramName);
-            Console.WriteLine();
+            Output.WriteLine("Usage:");
+            Output.WriteLine("    {0} [options]", this.ProgramName);
+            Output.WriteLine("    {0} help [command_or_topic]", this.ProgramName);
+            Output.WriteLine("    {0} command [args...]", this.ProgramName);
+            Output.WriteLine();
 
             if (AdditionalUsage != null)
             {
@@ -75,36 +81,36 @@ namespace NCommander
 
             if (Commands.Count > 0)
             {
-                Console.WriteLine("Commands:");
-                Console.WriteLine();
+                Output.WriteLine("Commands:");
+                Output.WriteLine();
                 foreach (var kvp in Commands)
                 {
-                    Console.WriteLine("    {0,-10} {1}", kvp.Key, kvp.Value.Description);
+                    Output.WriteLine("    {0,-10} {1}", kvp.Key, kvp.Value.Description);
                 }
-                Console.WriteLine();
+                Output.WriteLine();
             }
 
             if (HelpTopics.Count > 0)
             {
-                Console.WriteLine("Help topics:");
-                Console.WriteLine();
+                Output.WriteLine("Help topics:");
+                Output.WriteLine();
                 foreach (var topic in HelpTopics.Keys)
                 {
-                    Console.WriteLine("    {0}", topic);
+                    Output.WriteLine("    {0}", topic);
                 }
-                Console.WriteLine();
+                Output.WriteLine();
             }
 
             var types = GetAllParameterTypes();
             if (types.Length > 0)
             {
-                Console.WriteLine("Types:");
-                Console.WriteLine();
+                Output.WriteLine("Types:");
+                Output.WriteLine();
                 foreach (var type in types)
                 {
-                    Console.WriteLine("    {0,-10} {1}", type.Name, type.Description);
+                    Output.WriteLine("    {0,-10} {1}", type.Name, type.Description);
                 }
-                Console.WriteLine();
+                Output.WriteLine();
             }
         }
 
