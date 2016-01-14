@@ -29,6 +29,13 @@ namespace NCommander
 
         public void Execute(IEnumerable<string> args)
         {
+            var convertedArgs = ConvertArguments(args.ToList());
+
+            InternalExecute(convertedArgs);
+        }
+
+        protected Dictionary<string, object> ConvertArguments(List<string> args)
+        {
             bool optionalStarted = false;
             foreach (var param in Params)
             {
@@ -53,14 +60,6 @@ namespace NCommander
                 }
             }
 
-
-            var convertedArgs = ConvertArguments(args.ToList());
-
-            InternalExecute(convertedArgs);
-        }
-
-        protected Dictionary<string, object> ConvertArguments(List<string> args)
-        {
             var convertedArgs = new Dictionary<string, object>();
 
             foreach (var option in Options)
