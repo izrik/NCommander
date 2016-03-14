@@ -7,8 +7,3 @@ install:
 script:
   - xbuild /p:Configuration=Debug NCommander.sln 
   - nunit-console ./NCommanderTests/bin/Debug/NCommanderTests.dll
-
-branches:
-  only:
-    - travis
-    - master
