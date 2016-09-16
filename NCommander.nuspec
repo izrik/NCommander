@@ -16,5 +16,7 @@
   </metadata>
   <files>
     <file src="bin/Debug/NCommander.dll" target="lib/net40" />
+    <file src="bin/Debug/NCommander.*db" target="lib/net40" />
+    <file src="**/*.cs" target="src" />
   </files>
 </package>
