@@ -56,4 +56,7 @@
     <None Include="README.md" />
     <None Include="NCommander.nuspec" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="release.sh" />
+  </ItemGroup>
 </Project>
