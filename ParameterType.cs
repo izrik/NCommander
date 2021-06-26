@@ -32,7 +32,7 @@ namespace NCommander
                     "No conversion is performed. A parameter of this type can only " +
                     "appear at the end of the parameter list.",
                 outputType: typeof(string[]),
-                convertAction: (x) => null
+                convertAction: (x) => x
             );
 
 
