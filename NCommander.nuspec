@@ -6,17 +6,27 @@
     <title>NCommander</title>
     <authors>izrik</authors>
     <owners>izrik</owners>
-    <licenseUrl>https://github.com/izrik/NCommander/blob/master/LICENSE</licenseUrl>
+    <license type="expression">LGPL-3.0-or-later</license>
     <projectUrl>https://github.com/izrik/NCommander</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C# library for building command-base console applications. Inspired by python's argparse.</description>
-    <releaseNotes>Allow the user to specify where the output text goes.</releaseNotes>
-    <copyright>Copyright 2016 izrik</copyright>
+    <releaseNotes>Collect argument values for an option of type string-array.</releaseNotes>
+    <copyright>Copyright 2021 izrik</copyright>
     <tags>command line argument option parser parsing shell</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0" />
+    </dependencies>
   </metadata>
   <files>
-    <file src="bin/Debug/NCommander.dll" target="lib/net40" />
     <file src="bin/Debug/NCommander.*db" target="lib/net40" />
-    <file src="**/*.cs" target="src" />
+    <file src="*.cs" target="src" />
+    <file src="LICENSE" target="src/LICENSE" />
+    <file src="*.sln" target="src" />
+    <file src="*.csproj" target="src" />
+    <file src="README.md" target="src" />
+    <file src="Properties/*.cs" target="src/Properties" />
+    <file src="NCommanderTests/*.cs" target="src/NCommanderTests" />
+    <file src="NCommanderTests/NCommanderTests.csproj" target="src/NCommanderTests" />
+    <file src="NCommanderTests/packages.config" target="src/NCommanderTests" />
   </files>
 </package>
