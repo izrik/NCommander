@@ -109,3 +109,9 @@ UpgradeLog*.XML
 
 # MonoDevelop
 *.userprefs
+
+# Rider
+.idea/
+
+# nuget
+*.nupkg
