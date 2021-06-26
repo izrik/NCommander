@@ -103,7 +103,14 @@ namespace NCommander
                                 i++;
 
                                 object value = option.Type.ConvertAction(args[i]);
-                                convertedArgs[option.Name] = value;
+                                if (option.Type == ParameterType.StringArray)
+                                {
+                                    if (convertedArgs[option.Name] == null)
+                                        convertedArgs[option.Name] = new List<string>();
+                                    ((List<string>)convertedArgs[option.Name]).Add((string)value);
+                                }
+                                else
+                                    convertedArgs[option.Name] = value;
                             }
                             break;
                         }
@@ -146,6 +153,13 @@ namespace NCommander
                 !Params[p].IsOptional)
             {
                 throw new NotEnoughArgumentsForParameterException(Params[p]);
+            }
+
+            foreach (var option in Options)
+            {
+                if (option.Type == ParameterType.StringArray)
+                    convertedArgs[option.Name] =
+                        ((List<string>)convertedArgs[option.Name]).ToArray();
             }
 
             return convertedArgs;

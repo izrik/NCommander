@@ -282,6 +282,36 @@ namespace NCommanderTests
             Assert.AreEqual("arg1", a[0]);
             Assert.AreEqual("arg4", a[1]);
         }
+
+        [Test]
+        public void OptionStringArrayCanBeUsedManyTimesConsumingOneArgEach()
+        {
+            // given
+            var command = new Command
+            {
+                Options = new[]
+                {
+                    new Option
+                    {
+                        Name = "opt",
+                        Type = ParameterType.StringArray
+                    },
+                }
+            };
+            Dictionary<string, object> convertedArgs = null;
+            command.ExecuteDelegate = (x) => convertedArgs = x;
+
+            // when
+            command.Execute(new[] {"--opt", "value1", "--opt", "value2"});
+
+            // then
+            Assert.IsNotNull(convertedArgs);
+            Assert.AreEqual(1, convertedArgs.Count);
+            Assert.IsTrue(convertedArgs.ContainsKey("opt"));
+            Assert.IsInstanceOf<string[]>(convertedArgs["opt"]);
+            Assert.AreEqual(new string[] {"value1", "value2"},
+                convertedArgs["opt"]);
+        }
     }
 }
 
