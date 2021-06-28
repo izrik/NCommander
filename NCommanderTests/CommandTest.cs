@@ -312,6 +312,35 @@ namespace NCommanderTests
             Assert.AreEqual(new string[] {"value1", "value2"},
                 convertedArgs["opt"]);
         }
+
+        [Test]
+        public void OptionStringArrayNoArgsYieldsEmptyArray()
+        {
+            // given
+            var command = new Command
+            {
+                Options = new[]
+                {
+                    new Option
+                    {
+                        Name = "opt",
+                        Type = ParameterType.StringArray
+                    },
+                }
+            };
+            Dictionary<string, object> convertedArgs = null;
+            command.ExecuteDelegate = (x) => convertedArgs = x;
+
+            // when
+            command.Execute(new string[] {});
+
+            // then
+            Assert.IsNotNull(convertedArgs);
+            Assert.AreEqual(1, convertedArgs.Count);
+            Assert.IsTrue(convertedArgs.ContainsKey("opt"));
+            Assert.IsInstanceOf<string[]>(convertedArgs["opt"]);
+            Assert.AreEqual(new string[0], convertedArgs["opt"]);
+        }
     }
 }
 

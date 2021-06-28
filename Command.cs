@@ -158,8 +158,12 @@ namespace NCommander
             foreach (var option in Options)
             {
                 if (option.Type == ParameterType.StringArray)
-                    convertedArgs[option.Name] =
-                        ((List<string>)convertedArgs[option.Name]).ToArray();
+                {
+                    var value = ((List<string>) convertedArgs[option.Name]);
+                    if (value == null)
+                        value = new List<string>();
+                    convertedArgs[option.Name] = value.ToArray();
+                }
             }
 
             return convertedArgs;
