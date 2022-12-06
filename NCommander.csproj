@@ -19,4 +19,18 @@
     <PropertyGroup>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>NCommander</PackageId>
+        <!--<PackageVersion></PackageVersion>-->
+        <Title>NCommander</Title>
+        <Authors>izrik</Authors>
+        <!--<Owners></Owners>-->
+        <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/izrik/NCommander</PackageProjectUrl>
+        <Description>A C# library for building command-base console applications. Inspired by python's argparse.</Description>
+        <PackageReleaseNotes>Collect argument values for an option of type string-array.</PackageReleaseNotes>
+        <Copyright>Copyright 2021 izrik</Copyright>
+        <PackageTags>command line argument option parser parsing shell</PackageTags>
+    </PropertyGroup>
 </Project>
