@@ -10,7 +10,7 @@ namespace NCommanderTests.LineReaderT
     public class LineReaderTest
     {
         [Test]
-        public void ReadesLine()
+        public void ReadsLine()
         {
             // given
             Console.SetIn(new StringReader("this is input"));
