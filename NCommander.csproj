@@ -32,5 +32,11 @@
         <PackageReleaseNotes>Target newer frameworks.</PackageReleaseNotes>
         <Copyright>Copyright 2022 izrik</Copyright>
         <PackageTags>command line argument option parser parsing shell</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
 </Project>
