@@ -29,7 +29,7 @@
         <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/izrik/NCommander</PackageProjectUrl>
         <Description>A C# library for building command-base console applications. Inspired by python's argparse.</Description>
-        <PackageReleaseNotes>Collect argument values for an option of type string-array.</PackageReleaseNotes>
+        <PackageReleaseNotes>Target newer frameworks.</PackageReleaseNotes>
         <Copyright>Copyright 2022 izrik</Copyright>
         <PackageTags>command line argument option parser parsing shell</PackageTags>
     </PropertyGroup>
