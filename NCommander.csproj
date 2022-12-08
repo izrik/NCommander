@@ -30,7 +30,7 @@
         <PackageProjectUrl>https://github.com/izrik/NCommander</PackageProjectUrl>
         <Description>A C# library for building command-base console applications. Inspired by python's argparse.</Description>
         <PackageReleaseNotes>Collect argument values for an option of type string-array.</PackageReleaseNotes>
-        <Copyright>Copyright 2021 izrik</Copyright>
+        <Copyright>Copyright 2022 izrik</Copyright>
         <PackageTags>command line argument option parser parsing shell</PackageTags>
     </PropertyGroup>
 </Project>
