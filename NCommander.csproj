@@ -1,63 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A9E25E5D-EB90-4B4A-8793-4E9D97037E42}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>NCommander</RootNamespace>
-    <AssemblyName>NCommander</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="LineReader.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commander.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="Parameter.cs" />
-    <Compile Include="ParameterType.cs" />
-    <Compile Include="HelpCommand.cs" />
-    <Compile Include="Option.cs" />
-    <Compile Include="Splitter.cs" />
-    <Compile Include="UnrecognizedOptionException.cs" />
-    <Compile Include="NotEnoughArgumentsForOptionException.cs" />
-    <Compile Include="NotEnoughArgumentsForParameterException.cs" />
-    <Compile Include="InvalidParameterTypeException.cs" />
-    <Compile Include="OptionalParameterOutOfPlaceException.cs" />
-    <Compile Include="StringArrayParameterOutOfPlaceException.cs" />
-    <Compile Include="UnmatchedQuoteException.cs" />
-    <Compile Include="NCommanderException.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include=".travis.yml" />
-    <None Include="LICENSE" />
-    <None Include="README.md" />
-    <None Include="NCommander.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="release.sh" />
-  </ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net40;net45;net451;net452;net46;net461;net462;net47;net471;net472;net48;net6.0;net7.0</TargetFrameworks>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DefaultItemExcludes>
+            NCommanderTests/**;
+            instance/**;
+            packages/**;
+            tmp/**
+        </DefaultItemExcludes>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>NCommander</PackageId>
+        <!--<PackageVersion></PackageVersion>-->
+        <Title>NCommander</Title>
+        <Authors>izrik</Authors>
+        <!--<Owners></Owners>-->
+        <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/izrik/NCommander</PackageProjectUrl>
+        <Description>A C# library for building command-base console applications. Inspired by python's argparse.</Description>
+        <PackageReleaseNotes>Collect argument values for an option of type string-array.</PackageReleaseNotes>
+        <Copyright>Copyright 2021 izrik</Copyright>
+        <PackageTags>command line argument option parser parsing shell</PackageTags>
+    </PropertyGroup>
 </Project>

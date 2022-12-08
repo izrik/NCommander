@@ -10,4 +10,4 @@ if [[ -z "$VERSION" ]]; then
   exit 1
 fi
 
-nuget pack NCommander.nuspec -Version $VERSION
+dotnet pack --include-source --include-symbols NCommander.sln /p:PackageVersion=$VERSION
